@@ -1,7 +1,9 @@
-import { getDefaultWallets } from '@rainbow-me/rainbowkit'
 import { Chain, configureChains, createClient } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
+import { connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { metaMaskWallet } from '@rainbow-me/rainbowkit/wallets';
 
+// Configure chain information for local Stargazer chain
 const stargazerChain: Chain = {
   id: 42069,
   name: 'Stargazer',
@@ -21,6 +23,7 @@ const stargazerChain: Chain = {
   }
 };
 
+// Configure Wagmi client with Stargazer chain
 const { provider, chains } = configureChains(
   [stargazerChain],
   [
@@ -30,10 +33,15 @@ const { provider, chains } = configureChains(
   ]
 );
 
-const { connectors } = getDefaultWallets({
-  appName: 'Stargzer Example App',
-  chains,
-});
+// only use MetaMask for now
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      metaMaskWallet({ chains }),
+    ],
+  },
+]);
 
 export const client = createClient({
   autoConnect: true,

@@ -16,4 +16,4 @@ To install dependencies run:
 
 |Example                           | Command                                   |
 | :------------------------------- | :---------------------------------------- |
-|Staking Precompile Wagmi Local    | `yarn dev:staking-precompile-wagmi-local` |
+|Staking Precompile Wagmi Local    | `yarn dev:staking-precompile-example` |
