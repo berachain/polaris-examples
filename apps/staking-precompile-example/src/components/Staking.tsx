@@ -70,6 +70,11 @@ const Staking = () => {
         }
     }, [rawDelegation])
 
+    // Prepares a payload for writing a delegate transaction to the Staking Precompile contract.
+    // passed in arguments:
+    // validator_address: Address of the validator to delegate to
+    // formatToBaseUnit(input_amount, 18) a formatted value of the amount to delegate to the selected validator
+    // this payload will be used later to call the Staking Precompile contract's delegate function when the button is clicked.
     const { config } = usePrepareContractWrite({
         address: STAKING_PRECOMPILE_ADDRESS,
         abi: STAKING_ABI,
@@ -77,6 +82,8 @@ const Staking = () => {
         args: [validator_address as Address, formatToBaseUnit(input_amount, 18)],
     })
 
+    // When the button is clicked, it will call the Staking Precompile contract's delegate function.
+    // on Error, will log the error to the console.
     const { write } = useContractWrite({
         ...config,
         onError(error) {
