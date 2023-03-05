@@ -5,7 +5,7 @@ import { metaMaskWallet } from '@rainbow-me/rainbowkit/wallets';
 
 // Configure chain information for local Stargazer chain
 const stargazerChain: Chain = {
-  id: 42069,
+  id: 69420,
   name: 'Stargazer',
   network: 'stargazer',
   nativeCurrency: {
