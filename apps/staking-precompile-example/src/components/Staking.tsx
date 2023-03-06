@@ -17,6 +17,8 @@ import {
 import STAKING_ABI from '../abi/IStakingModule.abi';
 import formatToBaseUnit from '../utils/formatToBaseUnit';
 import { getHexEllipsis } from '../utils/getEvmEllipsis';
+import formatFromBaseUnit from '../utils/formatFromBaseUnit';
+import BigNumber from 'bignumber.js';
 
 // Default Address of the Staking Precompile Contract on Stargazer.
 // More information here: TODO: Add link to docs
@@ -59,13 +61,15 @@ const Staking = () => {
         abi: STAKING_ABI,
         functionName: 'getDelegation(address,address)',
         args: [address, validator_address],
+        watch: true,
     })
 
     // UseMemo will trigger this function when the value of rawDelegation changes. It will set the state variable
     // delegated_amount to the amount of tBera delegated to the selected validator.
     useMemo(() => {
         if (rawDelegation) {
-            const parsedDelegation = formatToBaseUnit(rawDelegation as string, 18).toString()
+            const castedDelegation = rawDelegation as BigNumber
+            const parsedDelegation = formatFromBaseUnit(castedDelegation.toString(), 18).toString()
             setDelegatedAmount(parsedDelegation)
         }
     }, [rawDelegation])
@@ -78,7 +82,7 @@ const Staking = () => {
     const { config } = usePrepareContractWrite({
         address: STAKING_PRECOMPILE_ADDRESS,
         abi: STAKING_ABI,
-        functionName: 'delegate(address,uint256)',
+        functionName: 'delegate',
         args: [validator_address as Address, formatToBaseUnit(input_amount, 18)],
     })
 
