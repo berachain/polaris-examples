@@ -16,7 +16,7 @@ function App({ Component, pageProps }: AppProps) {
     <WagmiConfig client={client}>
       <RainbowKitProvider chains={chains}>
         <NextHead>
-          <title>Stargazer Example Dapp</title>
+          <title>Polaris Example Dapp</title>
         </NextHead>
         <ChakraProvider theme={theme}>
           {mounted && <Component {...pageProps} />}

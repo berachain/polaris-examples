@@ -3,14 +3,14 @@ import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import { metaMaskWallet } from '@rainbow-me/rainbowkit/wallets';
 
-// Configure chain information for local Stargazer chain
-const stargazerChain: Chain = {
+// Configure chain information for local Polaris chain
+const PolarisChain: Chain = {
   id: 69420,
-  name: 'Stargazer',
-  network: 'stargazer',
+  name: 'Polaris',
+  network: 'Polaris',
   nativeCurrency: {
     decimals: 18,
-    name: 'Stargazer',
+    name: 'Polaris',
     symbol: 'tbera',
   },
   rpcUrls: {
@@ -23,9 +23,9 @@ const stargazerChain: Chain = {
   }
 };
 
-// Configure Wagmi client with Stargazer chain
+// Configure Wagmi client with Polaris chain
 const { provider, chains } = configureChains(
-  [stargazerChain],
+  [PolarisChain],
   [
     jsonRpcProvider({
       rpc: chain => ({ http: chain.rpcUrls.default.http[0] }),
